@@ -1,0 +1,12 @@
+{
+  "name": "countries",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass:build": "sass --watch scss/styles.scss css/styles.css"
+  },
+  "keywords": [],
+  "author": "jose <josevivers2000@gmail.com>",
+  "license": "MIT"
+}
