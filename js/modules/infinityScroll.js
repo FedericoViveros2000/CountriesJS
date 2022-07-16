@@ -14,6 +14,7 @@ let start = 0;
   //Funcion para insertar mas paises
   const createArticles = (info) => {
     countries = info;
+    console.log(info);
       info.map(data => {
           let article = document.createElement('article');
           article.innerHTML = `<article class="container__article" id="${data.name.common}">
@@ -41,7 +42,6 @@ let start = 0;
         observer.observe(article);
     }else{
       observer.unobserver(article);
-      console.log('DesObservado');
     }
   }
 

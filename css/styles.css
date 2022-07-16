@@ -10,11 +10,38 @@
 body {
   font-family: "Nunito Sans", sans-serif;
   background-color: hsl(0deg, 0%, 98%);
+  color: hsl(200deg, 15%, 8%);
   font-size: 14px;
+  transition: background-color 0.7s linear, color 0.7s linear;
+}
+
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: hsl(207deg, 26%, 17%);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: hsl(209deg, 23%, 22%);
+  border-radius: 20px;
 }
 
 body.dark {
   background-color: hsl(207deg, 26%, 17%);
+  color: hsl(0deg, 0%, 100%);
+}
+
+a {
+  text-decoration: none;
+  color: hsl(200deg, 15%, 8%);
+  cursor: pointer;
+  transition: color 0.5s line-height;
+}
+
+body.dark a {
+  color: hsl(0deg, 0%, 100%);
 }
 
 .navbar {
@@ -29,6 +56,10 @@ body.dark {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+body.dark .navbar {
+  background-color: hsl(209deg, 23%, 22%);
 }
 
 body.dark .img {
@@ -68,6 +99,17 @@ body.dark .img {
   border-radius: 3px;
   border: none;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+body.dark .search__select {
+  outline: none;
+  color: hsl(0deg, 0%, 100%);
+  background-color: hsl(209deg, 23%, 22%);
+}
+
+body.dark input {
+  outline: none;
+  color: hsl(0deg, 0%, 100%);
+  background-color: hsl(209deg, 23%, 22%);
 }
 
 .load {
@@ -145,11 +187,6 @@ body.dark .img {
   font-weight: 800;
   margin-bottom: 10px;
 }
-.container__article a {
-  text-decoration: none;
-  color: hsl(200deg, 15%, 8%);
-  cursor: pointer;
-}
 body.dark .container__article {
   background-color: hsl(209deg, 23%, 22%);
 }
@@ -184,6 +221,12 @@ body.dark .container__article {
   background-color: #cbd5e1;
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   height: 15px;
+}
+body.dark .squeleton__article {
+  background-color: hsl(209deg, 23%, 22%);
+}
+body.dark .squeleton__image, .squeleton__text {
+  background-color: hsl(207deg, 26%, 17%);
 }
 
 @media screen and (max-width: 962px) {

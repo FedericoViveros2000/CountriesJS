@@ -4,24 +4,53 @@
 
 *,
 ::after,
-::before{
+::before {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body{
+
+body {
     font-family: 'Nunito Sans', sans-serif;
     background-color: colors.$very-light-gray;
+    color: colors.$very-dark-blue-light;
     font-size: 14px;
+    transition: background-color .7s linear, 
+                color .7s linear;
 }
 
-body.dark{  
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+    background: colors.$very-dark-blue;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: colors.$dark-blue;
+    border-radius: 20px;
+}
+
+
+body.dark {
     background-color: colors.$very-dark-blue;
-
+    color: colors.$white;
 }
 
-.navbar{
+a {
+    text-decoration: none;
+    color: colors.$very-dark-blue-light;
+    cursor: pointer;
+    transition: color .5s line-height;
+}
+
+body.dark a {
+    color: colors.$white;
+}
+
+.navbar {
     width: 100%;
     padding: 20px;
     background-color: colors.$very-light-gray;
@@ -32,26 +61,31 @@ body.dark{
     @include mixins.flexbox(row, space-between, center);
 }
 
-body.dark .img{
+body.dark .navbar {
+    background-color: colors.$dark-blue;
+}
+
+body.dark .img {
     filter: brightness(.9);
 }
 
-.img{
+.img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.search{
+.search {
     width: 100%;
     padding: 10px 20px;
     flex-wrap: wrap;
     @include mixins.flexbox(row, space-between, center);
-    &__input{
+
+    &__input {
         width: 40%;
     }
 
-    input{
+    input {
         font-size: 14px;
         width: 100%;
         padding: 7px 10px;
@@ -60,7 +94,7 @@ body.dark .img{
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
 
-    &__select{
+    &__select {
         font-size: 16px;
         width: 30%;
         padding: 7px 10px;
@@ -69,13 +103,26 @@ body.dark .img{
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
 
+    
+    body.dark &__select{
+        outline: none;
+        color: colors.$white;
+        background-color: colors.$dark-blue;
+    }
+    
+}
+
+body.dark input {
+    outline: none;
+    color: colors.$white;
+    background-color: colors.$dark-blue;
 }
 
 .load {
     display: none;
 }
 
-.article{
+.article {
     position: absolute;
     top: 0px;
     width: 100%;
@@ -84,29 +131,30 @@ body.dark .img{
     place-items: center;
     padding: 0 30px;
 
-    &__flag{
+    &__flag {
         width: 100%;
         height: 50%;
     }
 
-    &__data{
+    &__data {
         display: flex;
         width: 100%;
         height: 50%;
         margin-left: 20px;
         align-items: center;
         justify-content: space-between;
-        &--one{
+
+        &--one {
             width: 50%;
         }
 
-        &--two{
+        &--two {
             width: 50%;
         }
 
     }
 
-    img{
+    img {
         max-width: 100%;
         object-fit: cover;
         border-radius: 7px;
@@ -118,13 +166,13 @@ body.dark .img{
     background-color: black;
 }
 
-.container{
+.container {
     position: absolute;
     top: 70px;
     width: 100%;
     z-index: -10;
 
-    &__section{
+    &__section {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 20px;
@@ -134,9 +182,7 @@ body.dark .img{
         z-index: 10;
     }
 
-  
-
-    &__article{
+    &__article {
         background-color: colors.$white;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         width: 100%;
@@ -144,41 +190,38 @@ body.dark .img{
         height: 400px;
         overflow: hidden;
 
-        &--text{
+        &--text {
             padding: 20px 30px;
             line-height: 2;
             word-wrap: break-word;
         }
 
-        &--title{
+        &--title {
             font-size: 18px;
             font-weight: 800;
             margin-bottom: 10px;
         }
-        
-        a{
-            text-decoration: none;
-            color: colors.$very-dark-blue-light;
-            cursor: pointer;
-        }
 
     }
-    body.dark &__article{
+
+    body.dark &__article {
         background-color: colors.$dark-blue;
     }
-    .text-span{
+
+    .text-span {
         font-weight: 600;
     }
 
-    &__image{
+    &__image {
         width: 100%;
         height: 50%;
     }
 
 }
-.squeleton{
 
-    &__article{
+.squeleton {
+
+    &__article {
         background-color: colors.$slate-light;
         width: 100%;
         animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
@@ -188,15 +231,15 @@ body.dark .img{
         overflow: hidden;
     }
 
-    &__image{
+    &__image {
         width: 100%;
         animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         height: 50%;
         border-radius: 7px;
         background-color: colors.$slate-normal;
     }
-    
-    &__text{
+
+    &__text {
         display: block;
         margin-top: 10px;
         border-radius: 5px;
@@ -205,49 +248,62 @@ body.dark .img{
         height: 15px;
     }
 
+    body.dark &__article {
+        background-color: colors.$dark-blue;
+    }
+
+    body.dark &__image,
+    &__text {
+        background-color: colors.$very-dark-blue;
+    }
+
 }
 
 @media screen and (max-width: 962px) {
-    .container__section{
+    .container__section {
         grid-template-columns: repeat(3, 1fr);
-        
+
     }
 }
 
 @media screen and (max-width: 768px) {
-    .container__section{
+    .container__section {
         grid-template-columns: repeat(2, 1fr);
-        
+
     }
 
-    .container__article{
+    .container__article {
         height: 350px;
     }
 }
 
-@media screen and (max-width: 462px){
+@media screen and (max-width: 462px) {
     .container__section {
         grid-template-columns: repeat(1, 1fr);
     }
 
-    .search{
+    .search {
 
-        &__input, &__select{
+        &__input,
+        &__select {
             width: 100%;
         }
 
-        &__select{
+        &__select {
             margin-top: 15px;
         }
-
     }
+
 }
 
 @keyframes pulse {
-    0%, 100% {
-      opacity: 1;
+
+    0%,
+    100% {
+        opacity: 1;
     }
+
     50% {
-      opacity: .8;
+        opacity: .8;
     }
 }
