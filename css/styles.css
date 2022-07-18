@@ -15,19 +15,6 @@ body {
   transition: background-color 0.7s linear, color 0.7s linear;
 }
 
-body::-webkit-scrollbar {
-  width: 12px;
-}
-
-body::-webkit-scrollbar-track {
-  background: hsl(207deg, 26%, 17%);
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: hsl(209deg, 23%, 22%);
-  border-radius: 20px;
-}
-
 body.dark {
   background-color: hsl(207deg, 26%, 17%);
   color: hsl(0deg, 0%, 100%);
@@ -120,33 +107,59 @@ body.dark input {
   position: absolute;
   top: 0px;
   width: 100%;
-  height: 90vh;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 30px;
+  grid-template-rows: 50px max-content;
   place-items: center;
   padding: 0 30px;
+  gap: 50px;
+  line-height: 2;
+}
+.article__border {
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  margin-right: 10px;
+  padding: 5px 15px;
+}
+.article__span {
+  font-weight: 600;
 }
 .article__flag {
-  width: 100%;
-  height: 50%;
+  max-width: 100%;
+  height: 400px;
+}
+.article__back {
+  grid-column: span 2;
+  height: auto;
+  justify-self: self-start;
+  padding: 7px 25px;
+  background-color: hsl(0deg, 0%, 100%);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border: none;
+  border-radius: 5px;
 }
 .article__data {
   display: flex;
   width: 100%;
-  height: 50%;
+  max-height: 400px;
+  flex-wrap: wrap;
   margin-left: 20px;
   align-items: center;
   justify-content: space-between;
 }
-.article__data--one {
+.article__data--one, .article__data--two {
   width: 50%;
 }
-.article__data--two {
-  width: 50%;
-}
-.article img {
-  max-width: 100%;
+.article__img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 7px;
+}
+body.dark .article__back {
+  background-color: hsl(209deg, 23%, 22%);
 }
 
 .load.loading {
@@ -225,7 +238,7 @@ body.dark .container__article {
 body.dark .squeleton__article {
   background-color: hsl(209deg, 23%, 22%);
 }
-body.dark .squeleton__image, .squeleton__text {
+body.dark .squeleton__text, body.dark .squeleton__image {
   background-color: hsl(207deg, 26%, 17%);
 }
 
@@ -240,6 +253,26 @@ body.dark .squeleton__image, .squeleton__text {
   }
   .container__article {
     height: 350px;
+  }
+  .article {
+    grid-template-columns: repeat(1, 100%);
+    gap: 20px;
+  }
+  .article__back {
+    grid-column: span 1;
+  }
+  .article__flag {
+    max-width: 100%;
+    height: 200px;
+  }
+  .article__data {
+    line-height: 2;
+  }
+  .article__data--one {
+    margin-bottom: 30px;
+  }
+  .article__data--one, .article__data--two {
+    width: 100%;
   }
 }
 @media screen and (max-width: 462px) {
