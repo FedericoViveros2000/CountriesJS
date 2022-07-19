@@ -61,6 +61,24 @@ body.dark .img {
     object-fit: cover;
 }
 
+.notFound{
+    grid-column: span 4;
+    text-align: center;
+    margin-top: 20px;
+    
+    &__img{
+        margin-bottom: 10px;
+        max-width: 200px;
+        max-height: 200px;
+    }
+    
+    body.dark &__img{
+        filter: brightness(.83);
+    }
+
+}
+
+
 .search {
     width: 100%;
     padding: 10px 20px;
@@ -74,7 +92,7 @@ body.dark .img {
     input {
         font-size: 14px;
         width: 100%;
-        padding: 7px 10px;
+        padding: 10px;
         border-radius: 3px;
         border: none;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -83,7 +101,7 @@ body.dark .img {
     &__select {
         font-size: 16px;
         width: 30%;
-        padding: 7px 10px;
+        padding: 10px;
         border-radius: 3px;
         border: none;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -96,6 +114,9 @@ body.dark .img {
         background-color: colors.$dark-blue;
     }
     
+    &.hide{
+        display: none;
+    }
 }
 
 body.dark input {
@@ -114,7 +135,6 @@ body.dark input {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    margin-top: 30px;
     grid-template-rows: 50px max-content;
     place-items: center;
     padding: 0 30px;
@@ -131,6 +151,10 @@ body.dark input {
 
     &__span{
         font-weight: 600;
+    }
+
+    &__title{
+        font-size: 24px;
     }
 
     &__flag{
@@ -265,11 +289,49 @@ body.dark input {
 
     body.dark &__article {
         background-color: colors.$dark-blue;
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
 
     body.dark &__text, 
     body.dark &__image {
         background-color: colors.$very-dark-blue;
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+}
+
+.error404{
+   // height: 80vh;
+text-align: center;
+
+    // @include mixins.flexbox(column, center, center);
+   grid-column: span 4;
+   line-height:2;
+    //gap: 30px;
+    &__text{
+        font-size: 2rem;
+    }
+
+    &__back{
+        display: inline-block;
+        font-size: 1rem;
+        background-color: colors.$error404;
+        padding: 3px 20px;
+        margin-top: 20px;
+        border-radius: 5px;
+        transition: background-color .5s ease-in;
+        color: colors.$white;
+    }
+
+    &__back:hover{
+        background-color: colors.$error404-hover;
+    }
+
+    &__image{
+        font-weight: 800;
+        text-align: center;
+        font-size: 4rem;
+        animation: upDown 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
 
 }
@@ -312,9 +374,23 @@ body.dark input {
             &--one, &--two {
                 width: 100%;
             }
-    
+        }
+
+        body.dark &__img{
+            opacity: 0.8;
         }
     }
+
+    .error404{
+        &__text{
+            font-size: 1rem;
+        }
+    
+        &__image{
+            font-size: 3rem;
+        }
+    }
+
 }
 
 @media screen and (max-width: 462px) {
@@ -323,7 +399,6 @@ body.dark input {
     }
 
     .search {
-
         &__input,
         &__select {
             width: 100%;
@@ -335,6 +410,17 @@ body.dark input {
     }
 
 }
+
+@keyframes upDown {
+    0%,
+    100% {
+        transform: translateY(10px);
+    }
+    50% {
+        transform: translateY(0px);
+    }
+}
+
 
 @keyframes pulse {
 

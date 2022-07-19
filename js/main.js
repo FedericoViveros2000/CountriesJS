@@ -10,26 +10,29 @@ import router from './router/router.js'
 document.addEventListener('DOMContentLoaded', e => {
     let start = 0;
     let end = 10;
-    let loader = document.getElementById('loader');
-    let urlRoot = 'https://restcountries.com/v3.1/';
-    let $inputSearch = document.getElementById('search');
+    const loader = document.getElementById('loader');
+    const urlRoot = 'https://restcountries.com/v3.1/';
+    const $inputSearch = document.getElementById('search');
     let observer = new IntersectionObserver(insertCountries, options);
     let data = [];
-    let btnMode = document.getElementById('btn-dark');
+    const btnMode = document.getElementById('btn-dark');
     let isDark =  document.body;
-    let countryRegion = document.getElementById('countryRegion');
+    const countryRegion = document.getElementById('countryRegion');
 
     router(`${urlRoot}`, observer);
 
     //Funcion mediante la cual filtramos los paises por region
-    countryRegion.addEventListener('change', ()=> {
+    countryRegion.addEventListener('change', () => {
+        //Reseteando el inicio y el fin de array de los paises en caso de que se filtren por continente.
+        start = 0;
+        end = 10;
         getCountry(`${urlRoot}region/${countryRegion.value}`, observer)
     })
     /*
         ?Comprobando si el usuario ya habia activado previamente o no el modo oscuro
     */ 
 
-    localStorage.dark == 'true' ? isDark.classList.add('dark') : isDark.classList.remove('dark');
+    localStorage.dark === 'true' ? isDark.classList.add('dark') : isDark.classList.remove('dark');
 
     btnMode.addEventListener('click', () => {
         isDark.classList.toggle('dark');
@@ -41,11 +44,13 @@ document.addEventListener('DOMContentLoaded', e => {
         entries.forEach(entry => {
             //Si el objeto del DOM enviado es interceptado o entra dentro de el viewport del usuario se acargaran nuevos paises en pantalla
             if (entry.isIntersecting) {
-                console.log("Interceptado");
-                data = countries.slice(start += 10, end += 10);
+                //Si la cantidad de paises existentes es mayor o igual a la cantidad de paises cargados, se ejecutara el scroll infinito
+                if (countries.length >= countries.slice(start += 10, end += 10).length) {
+                    data = countries.slice(start += 10, end += 10);
+                }
                 //Metodo para insertar nuevos paises.
                 createArticles(data);
-                //Metodo para modificar el observador, mediante el cual detectamos el ultimo pais mostrado y cargamaos mas.
+                //Metodo para modificar el observador, mediante el cual detectamos el ultimo pais mostrado y cargamos mas.
                 createObserver(observer);
             }
         });
@@ -57,7 +62,7 @@ document.addEventListener('DOMContentLoaded', e => {
     */
 
     window.addEventListener('hashchange', () => {
-        router(`${urlRoot}`);
+        router(`${urlRoot}`, observer);
     });
     
     /*
@@ -67,9 +72,7 @@ document.addEventListener('DOMContentLoaded', e => {
 
         //Filtrando los paises de acuerdo al Pais buscado.
         let filteredCountries = countries.filter(data => data.name.official.toLowerCase().includes($inputSearch.value.toLowerCase()));
-
         $containerCountry.innerHTML = '';
-
         //Pasando los paises correspondientes al buscado.
         $inputSearch.value != '' ? createArticles(filteredCountries) : createArticles(countries);
 

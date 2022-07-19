@@ -13,8 +13,9 @@ const getCountry = async (url, observer) => {
         loadingSqueleton();
         let contries = await fetch(url);
         countries = await contries.json();
-        $containerCountry.innerHTML = '';
         articles = countries.slice(0, 10);
+        //Limpiando el contenido HTML que aparece en la carga inicial, y si es que ya se vieron los detalles de un pais
+        $containerCountry.innerHTML = "";
         createArticles(articles);
         createObserver(observer);
     } catch (err) {
@@ -26,19 +27,18 @@ const getCountry = async (url, observer) => {
 const getCountrySelected = async (url) => {
     try {
         let response = await fetch(url);
-        console.log(url);
         countries = await response.json();
         //Insertando la vista mediante la cual vamos a mostrar los datos a detalle sobre el pais seleccionado
         createViewSelected(countries);
     } catch (err) {
         console.warn(err);
     }
-
 }
 
 export {
     getCountrySelected, 
     getCountry,
     countries,
-    articles
+    articles,
+    $containerCountry
 }

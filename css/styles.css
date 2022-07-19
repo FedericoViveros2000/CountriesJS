@@ -59,6 +59,20 @@ body.dark .img {
   object-fit: cover;
 }
 
+.notFound {
+  grid-column: span 4;
+  text-align: center;
+  margin-top: 20px;
+}
+.notFound__img {
+  margin-bottom: 10px;
+  max-width: 200px;
+  max-height: 200px;
+}
+body.dark .notFound__img {
+  filter: brightness(0.83);
+}
+
 .search {
   width: 100%;
   padding: 10px 20px;
@@ -74,7 +88,7 @@ body.dark .img {
 .search input {
   font-size: 14px;
   width: 100%;
-  padding: 7px 10px;
+  padding: 10px;
   border-radius: 3px;
   border: none;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -82,7 +96,7 @@ body.dark .img {
 .search__select {
   font-size: 16px;
   width: 30%;
-  padding: 7px 10px;
+  padding: 10px;
   border-radius: 3px;
   border: none;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -91,6 +105,9 @@ body.dark .search__select {
   outline: none;
   color: hsl(0deg, 0%, 100%);
   background-color: hsl(209deg, 23%, 22%);
+}
+.search.hide {
+  display: none;
 }
 
 body.dark input {
@@ -109,7 +126,6 @@ body.dark input {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  margin-top: 30px;
   grid-template-rows: 50px max-content;
   place-items: center;
   padding: 0 30px;
@@ -125,6 +141,9 @@ body.dark input {
 }
 .article__span {
   font-weight: 600;
+}
+.article__title {
+  font-size: 24px;
 }
 .article__flag {
   max-width: 100%;
@@ -237,9 +256,39 @@ body.dark .container__article {
 }
 body.dark .squeleton__article {
   background-color: hsl(209deg, 23%, 22%);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 body.dark .squeleton__text, body.dark .squeleton__image {
   background-color: hsl(207deg, 26%, 17%);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.error404 {
+  text-align: center;
+  grid-column: span 4;
+  line-height: 2;
+}
+.error404__text {
+  font-size: 2rem;
+}
+.error404__back {
+  display: inline-block;
+  font-size: 1rem;
+  background-color: rgb(3, 86, 239);
+  padding: 3px 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+  transition: background-color 0.5s ease-in;
+  color: hsl(0deg, 0%, 100%);
+}
+.error404__back:hover {
+  background-color: rgb(4, 57, 154);
+}
+.error404__image {
+  font-weight: 800;
+  text-align: center;
+  font-size: 4rem;
+  animation: upDown 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 @media screen and (max-width: 962px) {
@@ -274,6 +323,15 @@ body.dark .squeleton__text, body.dark .squeleton__image {
   .article__data--one, .article__data--two {
     width: 100%;
   }
+  body.dark .article__img {
+    opacity: 0.8;
+  }
+  .error404__text {
+    font-size: 1rem;
+  }
+  .error404__image {
+    font-size: 3rem;
+  }
 }
 @media screen and (max-width: 462px) {
   .container__section {
@@ -284,6 +342,14 @@ body.dark .squeleton__text, body.dark .squeleton__image {
   }
   .search__select {
     margin-top: 15px;
+  }
+}
+@keyframes upDown {
+  0%, 100% {
+    transform: translateY(10px);
+  }
+  50% {
+    transform: translateY(0px);
   }
 }
 @keyframes pulse {

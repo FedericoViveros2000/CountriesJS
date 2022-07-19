@@ -1,6 +1,7 @@
-let fragment = document.createDocumentFragment();
-let $containerCountry = document.getElementById('container-country');
-let $inputSearch = document.getElementById('search');
+const fragment = document.createDocumentFragment();
+const $containerCountry = document.getElementById('container-country');
+const $containerSearch = document.querySelector('.search');
+const $inputSearch = document.getElementById('search');
 let start = 0;
 
 //Opciones del Intersection Observer
@@ -16,14 +17,14 @@ const loadingSqueleton = () => {
     let article = document.createElement('article');
     article.classList.add('squeleton__article');
     article.innerHTML = `<figure class="squeleton__image">                         
-                              </figure>
-                              <p class="squeleton__text"></p>
-                              <p class="squeleton__text"></p>
-                              <p class="squeleton__text"></p>
-                              <p class="squeleton__text"></p>
-                              <p class="squeleton__text"></p>
-                              <p class="squeleton__text"></p>
-                              <p class="squeleton__text"></p>`
+                          </figure>
+                          <p class="squeleton__text"></p>
+                          <p class="squeleton__text"></p>
+                          <p class="squeleton__text"></p>
+                          <p class="squeleton__text"></p>
+                          <p class="squeleton__text"></p>
+                          <p class="squeleton__text"></p>
+                          <p class="squeleton__text"></p>`
     fragment.appendChild(article);
   }
 
@@ -32,23 +33,34 @@ const loadingSqueleton = () => {
 
 //Funcion para insertar mas paises
 const createArticles = (info) => {
-  info.map(data => {
-    let article = document.createElement('article');
-    article.innerHTML = `<article class="container__article" id="${data.name.common}">
-                                    <figure class="container__image">
-                                        <img src="${data.flags.svg}" alt="${data.name.official}" class="img" loading="lazy">
-                                        </figure>
-                                        <input type="hidden" value="${data}">
-                                        <div class="container__article--text">
-                                            <p class="container__article--title"><a href="#/details/${data.name.official}" id="${data.name.official}" class="link">${data.name.official}</a></p>
-                                            <p><span class="text-span">Population: </span>${new Intl.NumberFormat().format(data.population)}</p>
-                                            <p><span class="text-span">Region: </span>${data.region}</p>
-                                        </div>
-                                </article>`;
-    fragment.appendChild(article);
-  })
+    
+  //Si existen articulos relacionados con la palabra buscada
+  if (info.length > 0) {
+    $containerSearch.classList.remove('hide');
+    info.map(data => {
+      let { name, flags, population, region } = data;
+      let article = document.createElement('article');
+      article.innerHTML = `<article class="container__article" id="${name.common}">
+                                      <figure class="container__image">
+                                          <img src="${flags.svg}" alt="${name.official}" class="img" loading="lazy">
+                                          </figure>
+                                          <div class="container__article--text">
+                                              <p class="container__article--title"><a href="#/details/${name.official}" id="${name.official}" class="link">${name.official}</a></p>
+                                              <p><span class="text-span">Population: </span>${new Intl.NumberFormat().format(population)}</p>
+                                              <p><span class="text-span">Region: </span>${region}</p>
+                                          </div>
+                                  </article>`;
+      fragment.appendChild(article);
+    })
+    $containerCountry.appendChild(fragment);
 
-  $containerCountry.appendChild(fragment);
+  }else{
+    $containerCountry.innerHTML = `
+                          <div class="notFound">
+                              <img src="./img/no-results.png" class="notFound__img"/>
+                              <h1>No se han encontrado resultados</h1>
+                          </div>`;
+  }
 
 }
 
@@ -56,8 +68,6 @@ const createArticles = (info) => {
 const createObserver = (observer) => {
   let article = document.querySelectorAll(".container__article")[document.querySelectorAll(".container__article").length - 1];
   if ($inputSearch.value == "") {
-    console.log("Interceptado");
-    console.log(observer);
     observer.observe(article);
   }
 }
