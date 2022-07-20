@@ -1,12 +1,8 @@
-const $container = document.getElementById('container-country');
-const $containerSearch = document.querySelector('.search');
-let fragment = document.createDocumentFragment();
-
 //Funcion mediante la cual cargamos la vista con los datos del pais seleccionado.
 let createViewSelected = (data) => {
 
     $containerSearch.classList.add('hide');
-    let {name, population, region, subregion, currencies, languages, flags, capital } = data[0];
+    let { name, population, region, subregion, currencies, languages, flags, capital } = data[0];
     let $countrySelected = document.createElement('article');
     $countrySelected.classList.add('article');
     $countrySelected.innerHTML = `
@@ -38,7 +34,7 @@ let createViewSelected = (data) => {
     //     </a></button>`)}` 
     // : ''}
 
-    $container.appendChild(fragment);
+    $containerCountry.appendChild(fragment);
 };
 
 export {

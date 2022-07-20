@@ -1,5 +1,4 @@
 import {
-    $containerCountry,
     loadingSqueleton, 
     createObserver, 
     createArticles
@@ -26,8 +25,10 @@ const getCountry = async (url, observer) => {
 //Funcion para solicitar los datos del pais seleccionado a la API REST.
 const getCountrySelected = async (url) => {
     try {
+        loadingSqueleton();
         let response = await fetch(url);
         countries = await response.json();
+        $containerCountry.innerHTML = "";
         //Insertando la vista mediante la cual vamos a mostrar los datos a detalle sobre el pais seleccionado
         createViewSelected(countries);
     } catch (err) {
@@ -40,5 +41,4 @@ export {
     getCountry,
     countries,
     articles,
-    $containerCountry
 }

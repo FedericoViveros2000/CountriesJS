@@ -1,4 +1,3 @@
-const $containerCountry = document.getElementById('container-country');
 const error404 = () => {
     const insert = `
         <div class="error404">
@@ -57,7 +56,7 @@ const error404 = () => {
         </div>
     
         <p class="error404__text">
-            No se encuentra el sitio que estas buscando
+            El sitio que estas buscando no existe.
         </p>
     
         <a href="index.html" class="error404__back">Volver al inicio</a>

@@ -1,4 +1,4 @@
-import {getCountry, getCountrySelected, $containerCountry} from '../modules/requestsCountries.js';
+import {getCountry, getCountrySelected } from '../modules/requestsCountries.js';
 import error404 from '../modules/error404.js';
 
 /*
@@ -17,8 +17,9 @@ const router = (urlRequest = "https://restcountries.com/v3.1/", observer = '') =
         case ruta.includes('#/details/'):
             let name = ruta.slice(10);
             $containerCountry.innerHTML = '';
+            $inputSearch.value  = '';
             getCountrySelected(`${urlRequest}name/${name}`)    
-            break;
+        break;
             
         //Si se intenta acceder a una vista no existente.
         default:

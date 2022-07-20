@@ -1,8 +1,8 @@
 import {
-    $containerCountry,
     options,
     createArticles,
-    createObserver
+    createObserver, 
+    createArticlesFiltered
 } from './modules/infinityScroll.js';
 import { getCountry, countries } from './modules/requestsCountries.js'
 import router from './router/router.js'
@@ -10,34 +10,32 @@ import router from './router/router.js'
 document.addEventListener('DOMContentLoaded', e => {
     let start = 0;
     let end = 10;
-    const loader = document.getElementById('loader');
     const urlRoot = 'https://restcountries.com/v3.1/';
-    const $inputSearch = document.getElementById('search');
     let observer = new IntersectionObserver(insertCountries, options);
     let data = [];
-    const btnMode = document.getElementById('btn-dark');
-    let isDark =  document.body;
-    const countryRegion = document.getElementById('countryRegion');
-
+    
     router(`${urlRoot}`, observer);
 
     //Funcion mediante la cual filtramos los paises por region
-    countryRegion.addEventListener('change', () => {
+    $countryRegion.addEventListener('change', () => {
         //Reseteando el inicio y el fin de array de los paises en caso de que se filtren por continente.
         start = 0;
         end = 10;
-        getCountry(`${urlRoot}region/${countryRegion.value}`, observer)
+        $countryRegion.value != 'All' 
+        ? getCountry(`${urlRoot}region/${$countryRegion.value}`, observer) 
+        : getCountry(`${urlRoot}/lang/spa`, observer) 
     })
+
     /*
         ?Comprobando si el usuario ya habia activado previamente o no el modo oscuro
     */ 
-
     localStorage.dark === 'true' ? isDark.classList.add('dark') : isDark.classList.remove('dark');
 
-    btnMode.addEventListener('click', () => {
+    $btnMode.addEventListener('click', () => {
         isDark.classList.toggle('dark');
         isDark.classList.contains('dark') ? localStorage.dark = 'true' : localStorage.dark = '';
     })
+
     //Funcion mediante el cual vamos insertando los paises obtenidos por la API.
     function insertCountries(entries, observer) {
         loader.classList.add('loading');
@@ -60,7 +58,6 @@ document.addEventListener('DOMContentLoaded', e => {
     /* 
         ? Evento mediante el cual detectamos los cambios de la vistas a traves de los hashes de la URL
     */
-
     window.addEventListener('hashchange', () => {
         router(`${urlRoot}`, observer);
     });
@@ -71,10 +68,12 @@ document.addEventListener('DOMContentLoaded', e => {
     $inputSearch.addEventListener('keyup', () => {
 
         //Filtrando los paises de acuerdo al Pais buscado.
-        let filteredCountries = countries.filter(data => data.name.official.toLowerCase().includes($inputSearch.value.toLowerCase()));
+        let filteredCountries = countries.filter(data => data.name.official.toLowerCase().split(" ").join('').includes($inputSearch.value.toLowerCase().split(" ").join('')));
+
         $containerCountry.innerHTML = '';
+        
         //Pasando los paises correspondientes al buscado.
-        $inputSearch.value != '' ? createArticles(filteredCountries) : createArticles(countries);
+        $inputSearch.value != '' ? createArticlesFiltered(filteredCountries) : createArticles(countries.slice(0, 10));
 
         /*
             TODO Llamando a la funcion que asigna el observador para el scroll infinito, en caso de que se este buscando un pais en especifico, no se asigna el observador
