@@ -8,12 +8,12 @@ import { getCountry, countries } from './modules/requestsCountries.js'
 import router from './router/router.js'
 
 document.addEventListener('DOMContentLoaded', e => {
-    let start = 0;
+    let start = 0; 
     let end = 10;
     const urlRoot = 'https://restcountries.com/v3.1/';
     let observer = new IntersectionObserver(insertCountries, options);
     let data = [];
-    
+  
     router(`${urlRoot}`, observer);
 
     //Funcion mediante la cual filtramos los paises por region

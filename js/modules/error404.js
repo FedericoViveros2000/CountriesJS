@@ -56,10 +56,10 @@ const error404 = () => {
         </div>
     
         <p class="error404__text">
-            El sitio que estas buscando no existe.
+            The site you are looking for does not exist.
         </p>
     
-        <a href="index.html" class="error404__back">Volver al inicio</a>
+        <a href="index.html" class="error404__back">Back to home</a>
     
         </div>
     

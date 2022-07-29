@@ -5,7 +5,7 @@ import {
 } from '../modules/infinityScroll.js';
 import {createViewSelected} from '../modules/displayCountrySelected.js'
 let countries = [];
-let articles = [];
+let articles = []; 
 //Funcion general para solicitar todos los paises existentes
 const getCountry = async (url, observer) => {
     try {

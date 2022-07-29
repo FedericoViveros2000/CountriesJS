@@ -7,7 +7,6 @@ let options = {
   threshold: 0.3
 }
 
-
 //Loading Squeleton para cuando aun no se carguen los paises 
 const loadingSqueleton = () => {
   for (let index = 0; index < 8; index++) {
@@ -35,8 +34,7 @@ const createArticles = (info) => {
     
     info.map(data => {
       let { name, flags, population, region } = data;
-      let article = document.createElement('article');
-      
+      let article = document.createElement('article');     
       article.innerHTML = `<article class="container__article" id="${name.common}">
                               <figure class="container__image">
                                 <img src="${flags.svg}" alt="${name.official}" class="img img__load" loading="lazy">
@@ -77,9 +75,9 @@ const createArticlesFiltered = (info) => {
     $containerCountry.innerHTML = `
                            <div class="notFound">
                                <img src="./img/no-results.png" class="notFound__img"/>
-                               <h1>No se han encontrado resultados</h1>
+                               <h1>No results found</>
                            </div>`;
-  }
+  }  
 }
 
 //Metodo para asignar un nuevo observador a cada nuevo ultimo pais, para cargar nuevos resultados.
