@@ -51,5 +51,5 @@ Para que el desarrollo de esta *[Single Page Aplication](https://developer.mozil
 * José Viveros [github/José](https://github.com/FedericoViveros2000).
 
 ## Contacto
-* Gmail: [josevivers2000@gmail.com](josevivers2000@gmail.com).
+* Gmail: josevivers2000@gmail.com.
 
