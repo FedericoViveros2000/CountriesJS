@@ -16,7 +16,7 @@ Esta es una *[Single Page Aplication](https://developer.mozilla.org/en-US/docs/G
 * Posee la característica de seleccionar el tema de la aplicación *(modo oscuro / modo claro)*. 
 
 ## API REST.
-Para esta SPA utilizamos la API Rest de *[REST Countries]("https://restcountries.com/")* en la version 3.1. Con los siguientes endpoints.
+Para esta SPA utilizamos la API Rest de *[REST Countries](https://restcountries.com/)* en la version 3.1. Con los siguientes endpoints.
 
 Para obtener todos los paises existentes:
 ```
@@ -44,12 +44,12 @@ Para que el desarrollo de esta *[Single Page Aplication](https://developer.mozil
 
 * *[LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)* para la persistencia del tema de la aplicación.
 
-* *[Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)* para el manejo del *Infinity Scroll* o scroll infinito.
+* *[Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)* para el manejo del *Infinity Scroll* o *Scroll Infinito*.
 
 ## Autor
 
 * José Viveros [github/José](https://github.com/FedericoViveros2000).
 
 ## Contacto
-Gmail: [josevivers2000@gmail.com](josevivers2000@gmail.com).
+* Gmail: [josevivers2000@gmail.com](josevivers2000@gmail.com).
 
